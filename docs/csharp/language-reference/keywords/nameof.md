@@ -69,18 +69,18 @@ class C {
  Some C# examples:  
   
 ```csharp  
-using Stuff = Some.Cool.Functionality  
+using Stuff = Some.Cool.Functionality;  
 class C {  
-    static int Method1 (string x, int y) {}  
-    static int Method1 (string x, string y) {}  
-    int Method2 (int z) {}  
-    string f<T>() => nameof(T);  
+    public static int Method1 (string x, int y) => 1;  
+    public static int Method1 (string x, string y) => 2;  
+    public int Method2 (int z) => 3;  
+    public string f<T>() => nameof(T);  
 }  
-  
-var c = new C()  
   
 class Test {  
     static void Main (string[] args) {  
+        var c = new C();  
+
         Console.WriteLine(nameof(C)); // -> "C"  
         Console.WriteLine(nameof(C.Method1)); // -> "Method1"   
         Console.WriteLine(nameof(C.Method2)); // -> "Method2"  
@@ -89,7 +89,8 @@ class Test {
         // Console.WriteLine(nameof(z)); -> "z" [inside of Method2 ok, inside Method1 is a compiler error]  
         Console.WriteLine(nameof(Stuff)); // -> "Stuff"  
         // Console.WriteLine(nameof(T)); -> "T" [works inside of method but not in attributes on the method]  
-        Console.WriteLine(nameof(f)); // -> "f"  
+        Console.WriteLine(nameof(C.f)); // -> "f"  
+        Console.WriteLine(nameof(c.f)); // -> "f"  
         // Console.WriteLine(nameof(f<T>)); -> [syntax error]  
         // Console.WriteLine(nameof(f<>)); -> [syntax error]  
         // Console.WriteLine(nameof(Method2())); -> [error "This expression does not have a name"]  
